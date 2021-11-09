@@ -1,0 +1,15 @@
+<div class="form__create-task--container">
+  <form [formGroup]="createTaskForm" (ngSubmit)="onSubmit()" ngNativeValidate>
+    <label for="name" class="form__add-item--label">📝</label>
+    <input
+      id="name"
+      type="text"
+      class="form__add-item--input"
+      formControlName="name"
+      placeholder="Name..."
+      required
+    />
+
+    <button type="submit" class="form__add-item--submit-btn">Add Item</button>
+  </form>
+</div>

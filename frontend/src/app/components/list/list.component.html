@@ -1,0 +1,57 @@
+<div class="list-container">
+  <div *ngIf="todoList.length === 0; else showList" class="empty-status">
+    <img
+      src="../../../assets/images/thinking-thinker-cuestion-answer-svg-icon-man-thinking-icon-stencil-number-symbol-text-transparent-png-819222.png"
+      alt="thinking-icon"
+      width="150"
+      height="auto"
+    />
+    <p class="empty-text">
+      ARE YOU GOING TO PROCASTINATE? DON'T BE A FOOL AND JUST START TYPING YOUR
+      DUTIES...
+    </p>
+  </div>
+  <ng-template #showList>
+    <div *ngFor="let task of todoList" class="list__task-item--row">
+      <span
+        [ngClass]="task.status ? 'strikethrough' : 'list__text-item--style'"
+        (click)="task.status ? null : openDialog(task.id)"
+        >{{ task.name }}</span
+      >
+      <div class="task-panel">
+        <div
+          (click)="task.status ? uncheckTask(task.id) : completeTask(task.id)"
+        >
+          <img
+            src="../../../assets/icons/check-circle.svg"
+            alt="complete-icon"
+            class="task-btn"
+            *ngIf="!task.status; else showUncheckIcon"
+          />
+          <ng-template #showUncheckIcon>
+            <img
+              src="../../../assets/icons/arrow-left-circle.svg"
+              alt="uncheck-icon"
+              class="task-btn"
+            />
+          </ng-template>
+        </div>
+        <div (click)="deleteTask(task.id)">
+          <img
+            src="../../../assets/icons/trash.svg"
+            alt="delete-icon"
+            class="task-btn"
+          />
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="list___clear-items--submit-btn"
+      (click)="clearList()"
+    >
+      CLEAR ITEMS
+    </button>
+  </ng-template>
+</div>
